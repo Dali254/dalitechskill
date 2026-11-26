@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-pattern="profiz" data-kind="solid" data-ghost="outline">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f5fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0d16" media="(prefers-color-scheme: dark)">
+<script src="sr-boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sunrise.css">
+<script src="sunrise.js" defer></script>
+<title>Withdraw — Sunrise starter</title>
+<meta name="description" content="Withdraw your balance to M-Pesa.">
+</head>
+<body class="sr-app" data-page="withdraw" data-title="Withdraw">
+<div class="sr-main">
+<main class="sr-page">
+
+  <div class="sr-pagehead"><div><h1>Withdraw</h1><p>Money goes straight to your M-Pesa.</p></div></div>
+  <ol class="sr-steps" aria-label="Steps"><li class="is-done">Amount</li><li class="is-now">Confirm</li><li>Done</li></ol>
+  <div class="sr-grid sr-lg-main-side">
+    <section class="sr-stack">
+      <article class="sr-balance pz-c"><p class="pz-label">Available balance</p><p class="pz-value"><small>KES</small>1,120.00</p><p class="pz-hint">Minimum KES 100</p></article>
+      <form class="sr-card sr-stack" onsubmit="event.preventDefault();SR.sheet('confirm',true)">
+        <div class="sr-field"><label class="sr-label" for="amt">Amount</label>
+          <div class="sr-inputgroup"><span class="sr-inputgroup__addon">KES</span><input class="sr-input" id="amt" name="amount" inputmode="numeric" value="500" required></div></div>
+        <div class="sr-presets" data-target="amt" role="group" aria-label="Quick amounts">
+          <button type="button" data-amount="200">200</button><button type="button" data-amount="500" aria-pressed="true">500</button><button type="button" data-amount="1000">1,000</button><button type="button" data-amount="1120">All</button></div>
+        <div class="sr-field"><label class="sr-label" for="mp">M-Pesa number</label><input class="sr-input" id="mp" value="0712 000 111" inputmode="tel" autocomplete="tel"></div>
+        <dl class="sr-kv"><dt>Withdrawal fee</dt><dd>KES 25</dd><dt>You receive</dt><dd>KES 475</dd></dl>
+        <button class="sr-btn sr-btn--block" type="submit">Continue</button>
+      </form>
+    </section>
+    <aside class="sr-stack">
+      <div class="sr-alert"><span><svg class="sr-ic" aria-hidden="true"><use href="#i-info"/></svg></span><div><b>Paid within minutes</b><span class="sr-small">Withdrawals are sent automatically between 6 am and 10 pm.</span></div></div>
+      <div class="sr-card sr-card--flush"><div class="sr-card__head" style="padding:1rem 1.1rem 0;margin:0"><h3>Recent withdrawals</h3></div><ul class="sr-list">
+        <li class="sr-row"><div class="sr-row__main"><b>KES 500</b><span class="sr-row__sub">24 Nov · 0712 *** 111</span></div><span class="sr-badge sr-badge--ok">Paid</span></li>
+        <li class="sr-row"><div class="sr-row__main"><b>KES 1,000</b><span class="sr-row__sub">20 Nov · 0712 *** 111</span></div><span class="sr-badge sr-badge--ok">Paid</span></li>
+        <li class="sr-row"><div class="sr-row__main"><b>KES 300</b><span class="sr-row__sub">18 Nov · 0712 *** 111</span></div><span class="sr-badge sr-badge--warn">Pending</span></li></ul></div>
+    </aside>
+  </div>
+  <div class="sr-sheet" id="confirm" role="dialog" aria-modal="true" aria-labelledby="ct" aria-hidden="true"><div class="sr-sheet__panel sr-stack">
+    <div class="sr-sheet__grip"></div><h2 id="ct">Confirm withdrawal</h2>
+    <dl class="sr-kv"><dt>Amount</dt><dd>KES 500</dd><dt>Fee</dt><dd>KES 25</dd><dt>To</dt><dd>0712 000 111</dd><dt>You receive</dt><dd>KES 475</dd></dl>
+    <div class="sr-grid sr-md-2"><button class="sr-btn sr-btn--ghost" type="button" data-sheet-close>Cancel</button><button class="sr-btn" type="button" data-sheet-close data-toast="Withdrawal sent to M-Pesa">Withdraw KES 500</button></div>
+  </div></div>
+</main>
+</div>
+</body>
+</html>

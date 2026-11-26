@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" data-pattern="profiz" data-kind="solid" data-ghost="outline">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f5fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0d16" media="(prefers-color-scheme: dark)">
+<script src="sr-boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sunrise.css">
+<script src="sunrise.js" defer></script>
+<title>Profile — Sunrise starter</title>
+<meta name="description" content="Your account and settings.">
+</head>
+<body class="sr-app" data-page="profile" data-title="Profile">
+<div class="sr-main">
+<main class="sr-page">
+
+  <section class="sr-card sr-profilehead"><span class="sr-avatar" aria-hidden="true">AM</span><div style="flex:1;min-width:10rem"><h1 style="font-size:1.3rem">amina.k</h1><p class="sr-muted sr-small">Member since March 2026 · Level 2</p></div><span class="sr-badge sr-badge--ok"><svg class="sr-ic" aria-hidden="true"><use href="#i-check"/></svg>Verified</span></section>
+  <div class="sr-grid sr-lg-2">
+    <form class="sr-card sr-stack" onsubmit="event.preventDefault();SR.toast('Profile saved')"><h2>Personal details</h2>
+      <div class="sr-grid sr-md-2"><div class="sr-field"><label class="sr-label" for="u">Username</label><input class="sr-input" id="u" value="amina.k"></div>
+      <div class="sr-field"><label class="sr-label" for="ph">Phone</label><input class="sr-input" id="ph" value="0712 000 111" inputmode="tel"></div></div>
+      <div class="sr-field"><label class="sr-label" for="em">Email</label><input class="sr-input" id="em" type="email" value="amina@example.com"></div>
+      <div class="sr-field is-invalid"><label class="sr-label" for="mp2">M-Pesa name</label><input class="sr-input" id="mp2" value="" aria-invalid="true" aria-describedby="mp2e"><span class="sr-error" id="mp2e">Enter the name on your M-Pesa account.</span></div>
+      <button class="sr-btn" type="submit">Save changes</button></form>
+    <div class="sr-stack">
+      <section class="sr-card"><h2 style="margin-bottom:.6rem">Preferences</h2>
+        <div class="sr-setting"><div><b>Dark mode</b><p>Easier on the eyes at night.</p></div><button class="sr-btn sr-btn--ghost sr-btn--sm" type="button" data-mode-toggle><svg class="sr-ic" aria-hidden="true"><use href="#i-moon"/></svg>Switch</button></div>
+        <div class="sr-setting"><div><b>SMS alerts</b><p>Text me when money arrives.</p></div><label class="sr-switch"><input type="checkbox" checked><span class="sr-switch__track"></span><span class="sr-only">SMS alerts</span></label></div>
+        <div class="sr-setting"><div><b>Colour pattern</b><p>Your dashboard card colours.</p></div><select class="sr-select" data-pattern-select aria-label="Colour pattern" style="max-width:11rem;min-height:2.5rem"><option value="profiz">Profiz 3</option><option value="tropic">Tropical Pop</option><option value="jewel">Royal Jewel</option><option value="pastel">Pastel Cream</option><option value="sunset">Sunset Ramp</option><option value="neon">Neon Ocean</option></select></div></section>
+      <section class="sr-card sr-card--flush sr-acc"><details open><summary>How do I get paid?</summary><div>Withdraw from your balance to M-Pesa. Minimum KES 100.</div></details><details><summary>Why is a review pending?</summary><div>Reviews are checked within 24 hours.</div></details></section>
+      <a class="sr-btn sr-btn--ghost" href="login.html"><svg class="sr-ic" aria-hidden="true"><use href="#i-logout"/></svg>Sign out</a>
+    </div>
+  </div>
+</main>
+</div>
+</body>
+</html>

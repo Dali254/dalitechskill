@@ -3,260 +3,71 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sunrise Dashboard — Profiz 3 starter</title>
-<meta name="description" content="Starter member dashboard: Profiz 3 layout with six colour patterns, light and dark mode.">
 <meta name="theme-color" content="#f6f5fb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f0d16" media="(prefers-color-scheme: dark)">
-<!-- Apply the saved theme + pattern before first paint (no white flash). URL ?p=<pattern>&mode=dark|light overrides. -->
-<script>
-(function(){var P={profiz:['solid','outline','light'],tropic:['solid','3d','light'],jewel:['solid','gold','light'],
- pastel:['pastel','tint','light'],sunset:['solid','frost','light'],neon:['glass','neon','dark']};
- var q=new URLSearchParams(location.search),s={};try{s=JSON.parse(localStorage.getItem('sr-theme-v1')||'{}')}catch(e){}
- var p=q.get('p')||s.pattern||'profiz';if(!P[p])p='profiz';
- var m=q.get('mode')||s.mode||P[p][2];var h=document.documentElement;
- h.dataset.pattern=p;h.dataset.kind=P[p][0];h.dataset.ghost=P[p][1];h.classList.toggle('dark',m==='dark');
- window.SR_PATTERNS=P;})();
-</script>
+<script src="sr-boot.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-/* ── Tokens ─────────────────────────────────────────────────────────────── */
-:root{color-scheme:light;--paper:#f6f5fb;--surface:#fff;--surface-2:#fbfaff;--sunken:#f1eff7;--line:#ebe7f2;--line-strong:#ddd7e8;
- --heading:#15131c;--text:#3d3a48;--muted:#5d5a6b;--faint:#8a8699;--brand:#e0098f;--brand-2:#c8087f;
- --brand-fg:color-mix(in srgb,var(--brand) 80%,#000);--r-xl:1.15rem;--r-md:.9rem;--r-pill:999px;
- --sh-sm:0 6px 22px -14px #2b1a4a33;--font:"Poppins","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--ease:cubic-bezier(.22,1,.36,1)}
-.dark{color-scheme:dark;--paper:#0f0d16;--surface:#1a1724;--surface-2:#211d2e;--sunken:#14121c;--line:#2c2740;--line-strong:#3a3452;
- --heading:#f5f3fa;--text:#d6d2e2;--muted:#aaa4bd;--faint:#7f7994;--brand-fg:color-mix(in srgb,var(--brand) 55%,#fff);--sh-sm:0 8px 26px -16px #000b}
-/* ── Colour patterns (scripts/patterns.py --css) ────────────────────────── */
-[data-pattern="profiz"]{--c1a:#1a8259;--c1b:#066947;--c2a:#3466ec;--c2b:#1e4fd6;--c3a:#e3264f;--c3b:#b3123c;--c4a:#8a3cf0;--c4b:#5b21b6}
-[data-pattern="tropic"]{--c1a:#0b8378;--c1b:#0a6b62;--c2a:#cc4a08;--c2b:#a83c07;--c3a:#c81e6c;--c3b:#9d1754;--c4a:#4f46e5;--c4b:#3730a3}
-[data-pattern="jewel"]{--c1a:#047857;--c1b:#053d2e;--c2a:#1d4ed8;--c2b:#172a6b;--c3a:#be123c;--c3b:#6f0d26;--c4a:#7e22ce;--c4b:#4a136f;--edge:#f5c45166}
-[data-pattern="pastel"]{--c1a:#d1fae5;--c1b:#a7f3d0;--c1d:#047857;--c2a:#dbeafe;--c2b:#bfdbfe;--c2d:#1d4ed8;--c3a:#ffe4e6;--c3b:#fecdd3;--c3d:#be123c;--c4a:#ede9fe;--c4b:#ddd6fe;--c4d:#6d28d9;--card-text:#16121f}
-[data-pattern="sunset"]{--c1a:#c2410c;--c1b:#9a3412;--c2a:#e11d48;--c2b:#9f1239;--c3a:#be185d;--c3b:#831843;--c4a:#86198f;--c4b:#581c87}
-[data-pattern="neon"]{--c1a:#22d3ee;--c1b:#0e7490;--c2a:#a78bfa;--c2b:#6d28d9;--c3a:#fbbf24;--c3b:#b45309;--c4a:#4ade80;--c4b:#15803d}
-
-/* ── Base ───────────────────────────────────────────────────────────────── */
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--text);font:400 15px/1.5 var(--font);padding-bottom:7rem}
-h1,h2,h3{color:var(--heading);margin:0;letter-spacing:-.01em}
-button{font:inherit;color:inherit;cursor:pointer}a{color:var(--brand-fg)}
-.sr-ic{width:1.2em;height:1.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.sr-page{max-width:560px;margin:0 auto;padding:.75rem 1rem 1rem;display:grid;grid-template-columns:minmax(0,1fr);gap:.85rem}
-:focus-visible{outline:2.5px solid var(--brand);outline-offset:2px}
-
-/* top bar */
-.sr-topbar{position:sticky;top:.5rem;z-index:20;display:flex;align-items:center;gap:.6rem;background:var(--surface);border:1px solid var(--line);
- border-radius:var(--r-xl);padding:.5rem .6rem;box-shadow:var(--sh-sm)}
-.sr-logo{width:2.1rem;height:2.1rem;border-radius:.65rem;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
-.sr-brand{font-weight:800;color:var(--brand-fg);letter-spacing:.02em;flex:1;font-size:.95rem}
-.sr-iconbtn{width:2.5rem;height:2.5rem;border-radius:.75rem;border:0;background:transparent;display:grid;place-items:center;color:var(--muted)}
-.sr-iconbtn:hover{background:var(--sunken)}
-.sr-avatar{width:2.2rem;height:2.2rem;border-radius:.7rem;display:grid;place-items:center;font-weight:700;font-size:.8rem;color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
-
-/* greeting */
-.sr-greet{display:flex;align-items:center;gap:.8rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:1rem 1.1rem;box-shadow:var(--sh-sm)}
-.sr-greet .sr-avatar{border-radius:50%;width:2.4rem;height:2.4rem}
-.sr-greet__hello{font-weight:700;color:var(--heading);font-size:1.02rem}.sr-greet__hello b{color:var(--brand-fg)}
-
-/* ── Colour cards ───────────────────────────────────────────────────────── */
-.sr-balance{--a:var(--c1a);--b:var(--c1b);--d:var(--c1d,#fff);--g3d:url(i3d/wallet.webp);--gsvg:url(ghost/ghost-wallet.svg)}
-.sr-stats{display:grid;gap:.85rem}
-.sr-stats>.sr-stat:nth-child(1){--a:var(--c2a);--b:var(--c2b);--d:var(--c2d,#fff);--g3d:url(i3d/sparkle.webp);--gsvg:url(ghost/ghost-bolt.svg)}
-.sr-stats>.sr-stat:nth-child(2){--a:var(--c3a);--b:var(--c3b);--d:var(--c3d,#fff);--g3d:url(i3d/coins.webp);--gsvg:url(ghost/ghost-out.svg)}
-.sr-stats>.sr-stat:nth-child(3){--a:var(--c4a);--b:var(--c4b);--d:var(--c4d,#fff);--g3d:url(i3d/trophy.webp);--gsvg:url(ghost/ghost-trophy.svg)}
-.sr5-wcard:nth-child(4n+1){--a:var(--c1a);--b:var(--c1b);--d:var(--c1d,#fff)}.sr5-wcard:nth-child(4n+2){--a:var(--c2a);--b:var(--c2b);--d:var(--c2d,#fff)}
-.sr5-wcard:nth-child(4n+3){--a:var(--c3a);--b:var(--c3b);--d:var(--c3d,#fff)}.sr5-wcard:nth-child(4n+4){--a:var(--c4a);--b:var(--c4b);--d:var(--c4d,#fff)}
-
-.pz-c{position:relative;overflow:hidden;isolation:isolate;border-radius:var(--r-xl);color:#fff;padding:1.15rem 1.2rem 2.7rem;min-height:7.4rem;
- background:linear-gradient(160deg,var(--a),var(--b));box-shadow:0 0 0 1px var(--edge,transparent),0 12px 26px -16px var(--b)}
-.pz-c>*{position:relative;z-index:1}
-.pz-label{margin:0;text-transform:uppercase;letter-spacing:.16em;font-size:.76rem;font-weight:700}
-.pz-value{margin:.4rem 0 0;font-weight:800;font-size:1.75rem;line-height:1.15;font-variant-numeric:tabular-nums}
-.pz-value small{font-size:.62rem;font-weight:700;margin-right:.3rem;letter-spacing:.04em}
-.pz-hint{position:absolute;left:1.2rem;bottom:.95rem;margin:0;padding-left:.9rem;font-size:.84rem;font-weight:500}
-.pz-hint::before{content:"";position:absolute;left:0;top:50%;width:.42rem;height:.42rem;margin-top:-.21rem;border-radius:50%;background:currentColor;opacity:.85}
-.pz-btn{position:absolute;right:1.2rem;top:1.15rem;width:2.4rem;height:2.4rem;border-radius:.65rem;border:1.5px solid #ffffff73;background:#ffffff1f;
- display:grid;place-items:center;color:inherit}
-.pz-btn .sr-ic{width:1.1rem;height:1.1rem}
-/* icon behind the card */
-.pz-c::after{content:"";position:absolute;z-index:0;pointer-events:none;right:-.3rem;bottom:-.5rem;width:5.2rem;height:5.2rem}
-[data-ghost="outline"] .pz-c::after,[data-ghost="gold"] .pz-c::after,[data-ghost="tint"] .pz-c::after,[data-ghost="neon"] .pz-c::after{
- -webkit-mask:var(--gsvg) center/contain no-repeat;mask:var(--gsvg) center/contain no-repeat}
-[data-ghost="outline"] .pz-c::after{background:#fff;opacity:.16}
-[data-ghost="gold"] .pz-c::after{background:#f5c451;opacity:.42}
-[data-ghost="tint"] .pz-c::after{background:var(--d);opacity:.22}
-[data-ghost="neon"] .pz-c::after{background:var(--a);opacity:.7;filter:drop-shadow(0 0 6px var(--a))}
-[data-ghost="3d"] .pz-c::after{background:var(--g3d) center/contain no-repeat;width:5.6rem;height:5.6rem;right:-.7rem;bottom:-1.5rem;
- transform:rotate(-12deg);filter:drop-shadow(0 10px 14px #0006)}
-[data-ghost="frost"] .pz-c::after{background:var(--g3d) center/contain no-repeat;width:7.4rem;height:7.4rem;right:-.7rem;bottom:-1.5rem;
- opacity:.38;filter:grayscale(1) brightness(2.2) blur(.5px);mix-blend-mode:screen}
-.sr5-wcard.pz-c::after{display:none}
-/* pastel: dark text in light mode, tinted dark glass in dark mode */
-[data-kind="pastel"] .pz-c{color:var(--card-text);box-shadow:0 12px 26px -18px color-mix(in srgb,var(--d) 55%,transparent)}
-[data-kind="pastel"] .pz-btn{background:#ffffff99;border-color:#16121f33}
-.dark[data-kind="pastel"] .pz-c{color:#f6f4fb;background:linear-gradient(160deg,color-mix(in srgb,var(--d) 46%,#141120),color-mix(in srgb,var(--d) 24%,#141120));
- box-shadow:0 0 0 1px color-mix(in srgb,var(--b) 33%,transparent),0 14px 30px -18px #000}
-.dark[data-kind="pastel"] .pz-btn{background:#ffffff1a;border-color:#ffffff59}
-.dark[data-kind="pastel"] .pz-c::after{background:var(--b);opacity:.32}
-/* glass (neon): dark card, glowing edge, coloured amount */
-[data-kind="glass"] .pz-c{background:radial-gradient(120% 100% at 100% 0%,color-mix(in srgb,var(--a) 20%,transparent),transparent 55%),linear-gradient(160deg,#111a33,#0a1022);
- box-shadow:0 0 0 1.5px color-mix(in srgb,var(--a) 60%,transparent),0 16px 34px -18px var(--a)}
-[data-kind="glass"] .pz-label{color:#e8ecff}[data-kind="glass"] .pz-value{color:var(--a)}[data-kind="glass"] .pz-value small{color:#fff}
-
-/* section heading */
-.sr-sec{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-top:.7rem}
-.sr-eyebrow{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--brand-fg);margin:0 0 .15rem}
-.sr-sec h2{font-size:1.3rem}
-.sr-pill-link{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .85rem;border-radius:var(--r-pill);background:color-mix(in srgb,var(--brand) 10%,var(--surface));
- color:var(--brand-fg);font-weight:600;font-size:.85rem;text-decoration:none;white-space:nowrap}
-
-/* wallets */
-.sr5-wallets{display:grid;gap:.85rem}
-.sr5-wcard{padding:1rem 1.2rem 1.05rem;min-height:0}
-.sr5-wcard .pz-value{font-size:1.45rem;margin-top:.25rem}.sr5-wcard .pz-sub{margin:.1rem 0 0;font-size:.82rem}
-.sr5-wcard .pz-btn{top:1rem}
-
-/* ways to earn */
-.sr-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
-.sr-tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:.95rem;display:grid;gap:.5rem;text-decoration:none;color:var(--text);box-shadow:var(--sh-sm)}
-.sr-tile b{color:var(--heading);font-size:.95rem}.sr-tile span{font-size:.8rem;color:var(--muted)}
-.sr-glyph{width:2.4rem;height:2.4rem;border-radius:.75rem;display:grid;place-items:center;color:#fff;background:linear-gradient(160deg,var(--a),var(--b))}
-.sr-tile:nth-child(4n+1){--a:var(--c1a);--b:var(--c1b)}.sr-tile:nth-child(4n+2){--a:var(--c2a);--b:var(--c2b)}
-.sr-tile:nth-child(4n+3){--a:var(--c3a);--b:var(--c3b)}.sr-tile:nth-child(4n+4){--a:var(--c4a);--b:var(--c4b)}
-[data-kind="pastel"] .sr-glyph{background:linear-gradient(160deg,var(--d),color-mix(in srgb,var(--d) 70%,#000))}
-[data-kind="glass"] .sr-glyph{background:linear-gradient(160deg,var(--b),color-mix(in srgb,var(--b) 60%,#000))}
-
-/* partner link */
-.sr5-partner{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:1rem 1.1rem;box-shadow:var(--sh-sm);display:grid;grid-template-columns:minmax(0,1fr);gap:.75rem}
-.sr5-link{display:flex;gap:.5rem}.sr5-link input{flex:1;min-width:0;border:1px solid var(--line-strong);background:var(--sunken);color:var(--heading);border-radius:.8rem;padding:.65rem .8rem;font:500 .85rem var(--font)}
-.sr-btn{border:0;border-radius:.8rem;padding:.65rem 1rem;font-weight:700;background:var(--brand);color:#fff;box-shadow:0 10px 20px -12px var(--brand)}
-.sr5-share{display:flex;flex-wrap:wrap;gap:.5rem}
-.sr5-share a{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .75rem;border-radius:var(--r-pill);border:1px solid var(--line-strong);text-decoration:none;color:var(--heading);font-size:.82rem;font-weight:600}
-
-/* recent activity */
-.sr-list{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-sm);margin:0;padding:.3rem 0;list-style:none}
-.sr-list li{display:flex;align-items:center;gap:.75rem;padding:.75rem 1.1rem}.sr-list li+li{border-top:1px solid var(--line)}
-.sr-list .t{flex:1;min-width:0}.sr-list b{display:block;color:var(--heading);font-size:.9rem}
-.sr5-src{font-size:.78rem;color:var(--muted)}.sr-amt{font-weight:700;color:var(--heading);white-space:nowrap}
-
-/* demo switcher (remove in production) */
-.sr-demo{background:var(--surface);border:1px dashed var(--line-strong);border-radius:var(--r-xl);padding:.9rem 1.1rem;display:grid;gap:.6rem}
-.sr-demo label{font-size:.8rem;color:var(--muted);font-weight:600}
-.sr-demo select{width:100%;border:1px solid var(--line-strong);background:var(--sunken);color:var(--heading);border-radius:.75rem;padding:.6rem .7rem;font:500 .9rem var(--font)}
-
-/* tab bar with raised centre action */
-.sr-tabbar{position:fixed;left:50%;bottom:max(.6rem,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(540px,calc(100% - 1.2rem));z-index:30;
- display:grid;grid-template-columns:repeat(5,1fr);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:.4rem .3rem;
- box-shadow:0 -6px 24px -18px #2b1a4a66,0 18px 40px -20px #0005}
-.sr-tab{display:grid;justify-items:center;gap:.15rem;text-decoration:none;color:var(--muted);font-size:.72rem;font-weight:500;padding:.2rem 0}
-.sr-tab__icon{width:2.4rem;height:1.9rem;border-radius:.7rem;display:grid;place-items:center}
-.sr-tab.is-active{color:var(--brand-fg);font-weight:700}.sr-tab.is-active .sr-tab__icon{background:color-mix(in srgb,var(--brand) 14%,transparent)}
-.sr-tab--cta{color:var(--heading);font-weight:700}
-.sr-tab--cta .sr-tab__icon{width:3.3rem;height:3.3rem;border-radius:1rem;margin-top:-1.6rem;color:#fff;background:linear-gradient(140deg,var(--brand),#7e22ce);
- box-shadow:0 0 0 5px var(--surface),0 12px 22px -8px var(--brand)}
-.dark[data-pattern="neon"] .sr-tab--cta .sr-tab__icon{box-shadow:0 0 0 5px var(--surface),0 0 22px -2px var(--brand)}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-@media (min-width:900px){.sr-page{max-width:720px}.sr-stats{grid-template-columns:repeat(3,1fr)}.sr5-wallets{grid-template-columns:1fr 1fr}.sr-tiles{grid-template-columns:repeat(4,1fr)}}
-</style>
+<link rel="stylesheet" href="sunrise.css">
+<script src="sunrise.js" defer></script>
+<title>Dashboard — Sunrise starter</title>
+<meta name="description" content="Member dashboard: balance, wallets, ways to earn, partner link, recent activity.">
 </head>
-<body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
- <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0"/></symbol>
- <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
- <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
- <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></symbol>
- <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="7" rx="6" ry="3"/><path d="M3 7v4c0 1.7 2.7 3 6 3s6-1.3 6-3V7M9 14v3c0 1.7 2.7 3 6 3s6-1.3 6-3v-4c0-1.6-2.4-2.9-5.5-3"/></symbol>
- <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4a3 3 0 0 0 4 4M16 6h4a3 3 0 0 1-4 4M12 13v4M8 21h8M10 17h4v4h-4z"/></symbol>
- <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M21.5 20a6.5 6.5 0 0 0-4-6"/></symbol>
- <symbol id="i-hotel" viewBox="0 0 24 24"><path d="M3 21V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v16M16 9h3a2 2 0 0 1 2 2v10M2 21h20M7 7h2M11 7h2M7 11h2M11 11h2M8 21v-4h3v4"/></symbol>
- <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
- <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
- <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
- <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><path d="M3 10h14a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H3M7 6V5a2 2 0 0 1 2-2h7"/></symbol>
- <symbol id="i-list" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
- <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></symbol>
-</svg>
-
+<body class="sr-app" data-page="dashboard" data-title="Home">
+<div class="sr-main">
 <main class="sr-page">
-  <header class="sr-topbar">
-    <span class="sr-logo"><svg class="sr-ic"><use href="#i-wallet"/></svg></span>
-    <span class="sr-brand">NOVAPAL</span>
-    <button class="sr-iconbtn" aria-label="Notifications"><svg class="sr-ic"><use href="#i-bell"/></svg></button>
-    <button class="sr-iconbtn" id="mode" aria-label="Switch light or dark mode"><svg class="sr-ic"><use href="#i-moon"/></svg></button>
-    <span class="sr-avatar" aria-hidden="true">AM</span>
-  </header>
+  <section class="sr-greet"><span class="sr-avatar" aria-hidden="true">A</span><p class="sr-greet__hello">Good afternoon, <b>amina.k</b></p></section>
 
-  <section class="sr-greet"><span class="sr-avatar" aria-hidden="true">A</span><p class="sr-greet__hello" style="margin:0">Good afternoon, <b>amina.k</b></p></section>
-
-  <article class="sr-balance pz-c">
-    <p class="pz-label">Available balance</p>
-    <p class="pz-value"><small>KES</small>1,120.00</p>
-    <p class="pz-hint">Ready to withdraw</p>
-    <a class="pz-btn" href="#withdraw" aria-label="Withdraw"><svg class="sr-ic"><use href="#i-arrow"/></svg></a>
-  </article>
-
-  <div class="sr-stats">
-    <article class="sr-stat pz-c"><p class="pz-label">Today</p><p class="pz-value"><small>KES</small>0.00</p><p class="pz-hint">Start a task</p>
-      <span class="pz-btn" aria-hidden="true"><svg class="sr-ic"><use href="#i-spark"/></svg></span></article>
-    <article class="sr-stat pz-c"><p class="pz-label">Withdrawn</p><p class="pz-value"><small>KES</small>8,000.00</p><p class="pz-hint">Paid out</p>
-      <span class="pz-btn" aria-hidden="true"><svg class="sr-ic"><use href="#i-coins"/></svg></span></article>
-    <article class="sr-stat pz-c"><p class="pz-label">Lifetime</p><p class="pz-value"><small>KES</small>20,700.00</p><p class="pz-hint">All earnings</p>
-      <span class="pz-btn" aria-hidden="true"><svg class="sr-ic"><use href="#i-trophy"/></svg></span></article>
+  <div class="sr-dash-top sr-grid">
+    <article class="sr-balance pz-c">
+      <p class="pz-label">Available balance</p>
+      <p class="pz-value"><small>KES</small>1,120.00</p>
+      <p class="pz-hint">Ready to withdraw</p>
+      <a class="pz-btn" href="withdraw.html" aria-label="Withdraw"><svg class="sr-ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+    <div class="sr-stats">
+      <article class="sr-stat pz-c"><p class="pz-label">Today</p><p class="pz-value"><small>KES</small>0.00</p><p class="pz-hint">Start a task</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic" aria-hidden="true"><use href="#i-spark"/></svg></span></article>
+      <article class="sr-stat pz-c"><p class="pz-label">Withdrawn</p><p class="pz-value"><small>KES</small>8,000.00</p><p class="pz-hint">Paid out</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic" aria-hidden="true"><use href="#i-coins"/></svg></span></article>
+      <article class="sr-stat pz-c"><p class="pz-label">Lifetime</p><p class="pz-value"><small>KES</small>20,700.00</p><p class="pz-hint">All earnings</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic" aria-hidden="true"><use href="#i-trophy"/></svg></span></article>
+    </div>
   </div>
 
-  <div class="sr-sec"><div><p class="sr-eyebrow">Bonuses &amp; commissions</p><h2>My wallets</h2></div><a class="sr-pill-link" href="#">All commissions →</a></div>
-  <div class="sr5-wallets">
-    <article class="sr5-wcard pz-c"><p class="pz-label">Team bonus wallet</p><p class="pz-value"><small>KES</small>1,100.00</p><p class="pz-sub">1 direct team member</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic"><use href="#i-users"/></svg></span></article>
-    <article class="sr5-wcard pz-c"><p class="pz-label">Hotel royalties wallet</p><p class="pz-value"><small>KES</small>0.00</p><p class="pz-sub">Hotel unlocks · Hotel Reviews</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic"><use href="#i-hotel"/></svg></span></article>
-    <article class="sr5-wcard pz-c"><p class="pz-label">Chat royalties wallet</p><p class="pz-value"><small>KES</small>0.00</p><p class="pz-sub">Chat profile unlocks</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic"><use href="#i-chat"/></svg></span></article>
-    <article class="sr5-wcard pz-c"><p class="pz-label">AI royalties wallet</p><p class="pz-value"><small>KES</small>20.00</p><p class="pz-sub">AI training task unlocks</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic"><use href="#i-cpu"/></svg></span></article>
+  <div class="sr-sec"><div><p class="sr-eyebrow">Bonuses &amp; commissions</p><h2>My wallets</h2></div><a class="sr-pill-link" href="transactions.html">All commissions →</a></div>
+  <div class="sr-wallets sr-grid sr-cycle">
+    <article class="sr5-wcard pz-c"><p class="pz-label">Team bonus wallet</p><p class="pz-value"><small>KES</small>1,100.00</p><p class="pz-sub">1 direct team member</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic" aria-hidden="true"><use href="#i-users"/></svg></span></article>
+    <article class="sr5-wcard pz-c"><p class="pz-label">Hotel royalties wallet</p><p class="pz-value"><small>KES</small>0.00</p><p class="pz-sub">Hotel unlocks · Hotel Reviews</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic" aria-hidden="true"><use href="#i-hotel"/></svg></span></article>
+    <article class="sr5-wcard pz-c"><p class="pz-label">Chat royalties wallet</p><p class="pz-value"><small>KES</small>0.00</p><p class="pz-sub">Chat profile unlocks</p><span class="pz-btn" aria-hidden="true"><svg class="sr-ic" aria-hidden="true"><use href="#i-chat"/></svg></span></article>
   </div>
 
-  <div class="sr-sec"><div><p class="sr-eyebrow">Earn more</p><h2>Ways to earn</h2></div></div>
-  <div class="sr-tiles">
-    <a class="sr-tile" href="#"><span class="sr-glyph"><svg class="sr-ic"><use href="#i-hotel"/></svg></span><b>Hotel reviews</b><span>Rate stays, earn per review</span></a>
-    <a class="sr-tile" href="#"><span class="sr-glyph"><svg class="sr-ic"><use href="#i-chat"/></svg></span><b>Teach Swahili</b><span>AI practice students</span></a>
-    <a class="sr-tile" href="#"><span class="sr-glyph"><svg class="sr-ic"><use href="#i-cpu"/></svg></span><b>AI training</b><span>Label and check answers</span></a>
-    <a class="sr-tile" href="#"><span class="sr-glyph"><svg class="sr-ic"><use href="#i-users"/></svg></span><b>Invite friends</b><span>Earn team bonuses</span></a>
+  <div class="sr-sec"><div><p class="sr-eyebrow">Earn more</p><h2>Ways to earn</h2></div><a class="sr-pill-link" href="tasks.html">See all →</a></div>
+  <div class="sr-tiles sr-cycle">
+    <a class="sr-tile" href="tasks.html"><span class="sr-glyph"><svg class="sr-ic" aria-hidden="true"><use href="#i-hotel"/></svg></span><b>Hotel reviews</b><span>Rate stays, earn per review</span></a>
+    <a class="sr-tile" href="tasks.html"><span class="sr-glyph"><svg class="sr-ic" aria-hidden="true"><use href="#i-chat"/></svg></span><b>Teach Swahili</b><span>AI practice students</span></a>
+    <a class="sr-tile" href="tasks.html"><span class="sr-glyph"><svg class="sr-ic" aria-hidden="true"><use href="#i-cpu"/></svg></span><b>AI training</b><span>Label and check answers</span></a>
+    <a class="sr-tile" href="tasks.html"><span class="sr-glyph"><svg class="sr-ic" aria-hidden="true"><use href="#i-users"/></svg></span><b>Invite friends</b><span>Earn team bonuses</span></a>
   </div>
 
-  <section class="sr5-partner">
-    <div><p class="sr-eyebrow">Partner link</p><h2 style="font-size:1.1rem">Share and earn commissions</h2></div>
-    <div class="sr5-link"><input id="ref" size="10" value="https://novapal.app/r/AMINA" readonly aria-label="Your partner link"><button class="sr-btn" id="copy">Copy</button></div>
-    <div class="sr5-share"><a href="#">WhatsApp</a><a href="#">Facebook</a><a href="#">Telegram</a><a href="#">X</a><a href="#">SMS</a></div>
-  </section>
+  <div class="sr-grid sr-lg-main-side" style="margin-top:.7rem" id="team">
+    <section class="sr-stack">
+      <div class="sr-sec" style="margin-top:0"><div><p class="sr-eyebrow">History</p><h2>Recent activity</h2></div><a class="sr-pill-link" href="transactions.html">View all →</a></div>
+      <div class="sr-card sr-card--flush"><ul class="sr-list">
+        <li class="sr-row"><span class="sr-glyph" style="--a:var(--c1a);--b:var(--c1b);--d:var(--c1d,#fff)"><svg class="sr-ic" aria-hidden="true"><use href="#i-users"/></svg></span><div class="sr-row__main"><b>Team commission</b><span class="sr-row__sub">Level 1 · brian.o · Hotel unlock</span></div><span class="sr-amt sr-amt--in">+ KES 30</span></li>
+        <li class="sr-row"><span class="sr-glyph" style="--a:var(--c3a);--b:var(--c3b);--d:var(--c3d,#fff)"><svg class="sr-ic" aria-hidden="true"><use href="#i-wallet"/></svg></span><div class="sr-row__main"><b>Withdrawal to M-Pesa</b><span class="sr-row__sub">0712 *** 111 · completed</span></div><span class="sr-amt">− KES 500</span></li>
+        <li class="sr-row"><span class="sr-glyph" style="--a:var(--c2a);--b:var(--c2b);--d:var(--c2d,#fff)"><svg class="sr-ic" aria-hidden="true"><use href="#i-cpu"/></svg></span><div class="sr-row__main"><b>AI training task</b><span class="sr-row__sub">Task #2041 · approved</span></div><span class="sr-amt sr-amt--in">+ KES 20</span></li>
+      </ul></div>
+    </section>
+    <section class="sr-card sr-stack" aria-labelledby="pl">
+      <div><p class="sr-eyebrow">Partner link</p><h2 id="pl" style="font-size:1.1rem">Share and earn commissions</h2></div>
+      <div class="sr-copy"><code id="ref">https://novapal.app/r/AMINA</code><button class="sr-btn sr-btn--sm" type="button" data-copy-from="#ref" data-copy><svg class="sr-ic" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button></div>
+      <div class="sr5-share"><a href="#">WhatsApp</a><a href="#">Facebook</a><a href="#">Telegram</a><a href="#">X</a><a href="#">SMS</a></div>
+    </section>
+  </div>
 
-  <div class="sr-sec"><div><p class="sr-eyebrow">History</p><h2>Recent activity</h2></div></div>
-  <ul class="sr-list">
-    <li><div class="t"><b>Team commission</b><span class="sr5-src">Level 1 · brian.o · Hotel unlock</span></div><span class="sr-amt">+ KES 30</span></li>
-    <li><div class="t"><b>Withdrawal to M-Pesa</b><span class="sr5-src">0712 *** 111 · completed</span></div><span class="sr-amt">− KES 500</span></li>
-    <li><div class="t"><b>AI training task</b><span class="sr5-src">Task #2041 · approved</span></div><span class="sr-amt">+ KES 20</span></li>
-  </ul>
-
-  <section class="sr-demo" aria-label="Demo controls">
-    <label for="pat">Demo — colour pattern (remove in production)</label>
-    <select id="pat"><option value="profiz">Profiz 3</option><option value="tropic">Tropical Pop</option><option value="jewel">Royal Jewel</option>
-      <option value="pastel">Pastel Cream</option><option value="sunset">Sunset Ramp</option><option value="neon">Neon Ocean</option></select>
+  <section class="sr-card sr-row-wrap" aria-label="Demo controls" style="justify-content:space-between">
+    <label class="sr-label" for="pat">Demo — colour pattern</label>
+    <select class="sr-select" id="pat" data-pattern-select style="max-width:16rem"><option value="profiz">Profiz 3</option><option value="tropic">Tropical Pop</option><option value="jewel">Royal Jewel</option><option value="pastel">Pastel Cream</option><option value="sunset">Sunset Ramp</option><option value="neon">Neon Ocean</option></select>
   </section>
 </main>
-
-<nav class="sr-tabbar" aria-label="Main">
-  <a class="sr-tab is-active" href="#" aria-current="page"><span class="sr-tab__icon"><svg class="sr-ic"><use href="#i-home"/></svg></span>Home</a>
-  <a class="sr-tab" href="#"><span class="sr-tab__icon"><svg class="sr-ic"><use href="#i-spark"/></svg></span>Earn</a>
-  <a class="sr-tab sr-tab--cta" href="#withdraw"><span class="sr-tab__icon"><svg class="sr-ic"><use href="#i-wallet"/></svg></span>Withdraw</a>
-  <a class="sr-tab" href="#"><span class="sr-tab__icon"><svg class="sr-ic"><use href="#i-list"/></svg></span>Activity</a>
-  <a class="sr-tab" href="#"><span class="sr-tab__icon"><svg class="sr-ic"><use href="#i-grid"/></svg></span>Menu</a>
-</nav>
-
-<script>
-(function(){
-  var h=document.documentElement,P=window.SR_PATTERNS;
-  function save(){try{localStorage.setItem('sr-theme-v1',JSON.stringify({mode:h.classList.contains('dark')?'dark':'light',pattern:h.dataset.pattern}))}catch(e){}}
-  document.getElementById('mode').onclick=function(){h.classList.toggle('dark');save()};
-  var sel=document.getElementById('pat');sel.value=h.dataset.pattern;
-  sel.onchange=function(){var p=sel.value;h.dataset.pattern=p;h.dataset.kind=P[p][0];h.dataset.ghost=P[p][1];h.classList.toggle('dark',P[p][2]==='dark');save()};
-  document.getElementById('copy').onclick=function(){var i=document.getElementById('ref');(navigator.clipboard?navigator.clipboard.writeText(i.value):Promise.reject()).catch(function(){i.select();document.execCommand('copy')});this.textContent='Copied'};
-})();
-</script>
+</div>
 </body>
 </html>

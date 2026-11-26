@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" data-pattern="profiz" data-kind="solid" data-ghost="outline">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f5fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0d16" media="(prefers-color-scheme: dark)">
+<script src="sr-boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sunrise.css">
+<script src="sunrise.js" defer></script>
+<title>Admin — Sunrise starter</title>
+<meta name="description" content="Admin overview: members, withdrawals, settings.">
+</head>
+<body class="sr-app" data-page="admin" data-nav="admin" data-title="Admin">
+<div class="sr-main">
+<main class="sr-page">
+
+  <div class="sr-pagehead"><div><p class="sr-eyebrow">Admin panel</p><h1>Overview</h1><p>Today, 26 Nov 2026</p></div><button class="sr-btn" type="button" data-toast="Report exported"><svg class="sr-ic" aria-hidden="true"><use href="#i-down"/></svg>Export</button></div>
+  <div class="sr-kpis"><div class="sr-kpi"><span>Members</span><b>12,480</b><small>+86 today</small></div><div class="sr-kpi"><span>Deposits</span><b>KES 182k</b><small>+4%</small></div>
+    <div class="sr-kpi"><span>Withdrawals</span><b>KES 96k</b></div><div class="sr-kpi"><span>Pending payouts</span><b>3</b></div></div>
+  <div class="sr-grid sr-lg-main-side">
+    <section class="sr-card sr-card--flush" id="members"><div class="sr-card__head" style="padding:1rem 1.1rem 0"><h2>Members</h2><div class="sr-inputgroup" style="max-width:15rem"><span class="sr-inputgroup__addon"><svg class="sr-ic" aria-hidden="true"><use href="#i-search"/></svg></span><input class="sr-input" type="search" placeholder="Search" aria-label="Search members" style="min-height:2.5rem"></div></div>
+      <table class="sr-table sr-table--stack"><caption class="sr-only">Members</caption><thead><tr><th>Member</th><th>Phone</th><th class="num">Balance</th><th>Status</th><th><span class="sr-only">Action</span></th></tr></thead><tbody><tr><td class="sr-td-main" data-label="Member"><b style="color:var(--heading)">amina.k</b></td><td data-label="Phone">0712 000 111</td><td class="num" data-label="Balance">KES 1,120</td><td data-label="Status"><span class="sr-badge sr-badge--ok">Active</span></td><td data-label="Action"><button class="sr-btn sr-btn--ghost sr-btn--sm" type="button" data-toast="Opened amina.k">View</button></td></tr><tr><td class="sr-td-main" data-label="Member"><b style="color:var(--heading)">brian.o</b></td><td data-label="Phone">0722 111 222</td><td class="num" data-label="Balance">KES 340</td><td data-label="Status"><span class="sr-badge sr-badge--ok">Active</span></td><td data-label="Action"><button class="sr-btn sr-btn--ghost sr-btn--sm" type="button" data-toast="Opened brian.o">View</button></td></tr><tr><td class="sr-td-main" data-label="Member"><b style="color:var(--heading)">joy.w</b></td><td data-label="Phone">0733 222 333</td><td class="num" data-label="Balance">KES 0</td><td data-label="Status"><span class="sr-badge sr-badge--warn">Unverified</span></td><td data-label="Action"><button class="sr-btn sr-btn--ghost sr-btn--sm" type="button" data-toast="Opened joy.w">View</button></td></tr><tr><td class="sr-td-main" data-label="Member"><b style="color:var(--heading)">peter.m</b></td><td data-label="Phone">0744 333 444</td><td class="num" data-label="Balance">KES 2,050</td><td data-label="Status"><span class="sr-badge sr-badge--bad">Suspended</span></td><td data-label="Action"><button class="sr-btn sr-btn--ghost sr-btn--sm" type="button" data-toast="Opened peter.m">View</button></td></tr></tbody></table></section>
+    <section class="sr-card sr-stack" id="withdrawals"><h2>Withdrawals waiting</h2>
+      <ul class="sr-list sr-bleed"><li class="sr-row"><div class="sr-row__main"><b>peter.m · KES 2,000</b><span class="sr-row__sub">Flagged: new phone number</span></div><button class="sr-btn sr-btn--sm" data-toast="Approved">Approve</button></li>
+      <li class="sr-row"><div class="sr-row__main"><b>joy.w · KES 150</b><span class="sr-row__sub">Waiting for M-Pesa</span></div><span class="sr-badge sr-badge--warn">Pending</span></li></ul>
+      <div class="sr-field"><span class="sr-label">M-Pesa callback URL</span><div class="sr-copy"><code id="cb">https://novapal.app/api/mpesa/callback</code><button class="sr-btn sr-btn--soft sr-btn--sm" type="button" data-copy-from="#cb" data-copy><svg class="sr-ic" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button></div></div></section>
+  </div>
+  <form class="sr-card sr-stack" id="settings" onsubmit="event.preventDefault();SR.toast('Settings saved')"><h2>Settings</h2>
+    <div><div class="sr-setting"><div><b>Maintenance mode</b><p>Members see a "back soon" page. Admins can still sign in.</p></div><label class="sr-switch"><input type="checkbox"><span class="sr-switch__track"></span><span class="sr-only">Maintenance mode</span></label></div>
+    <div class="sr-setting"><div><b>"I agree to the terms" on sign-up</b><p>Show the checkbox on the register page.</p></div><label class="sr-switch"><input type="checkbox" checked><span class="sr-switch__track"></span><span class="sr-only">Terms checkbox</span></label></div>
+    <div class="sr-setting"><div><b>Withdrawal fee</b><p>Charged on each withdrawal.</p></div><div class="sr-inputgroup" style="max-width:9rem"><span class="sr-inputgroup__addon">KES</span><input class="sr-input" value="25" inputmode="numeric" aria-label="Withdrawal fee" style="min-height:2.5rem"></div></div></div>
+    <div class="sr-savebar"><p>You have unsaved changes</p><button class="sr-btn" type="submit">Save settings</button></div>
+  </form>
+</main>
+</div>
+</body>
+</html>

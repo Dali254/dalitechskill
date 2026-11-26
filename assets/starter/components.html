@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-pattern="profiz" data-kind="solid" data-ghost="outline">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f5fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0d16" media="(prefers-color-scheme: dark)">
+<script src="sr-boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sunrise.css">
+<script src="sunrise.js" defer></script>
+<title>Components — Sunrise starter</title>
+<meta name="description" content="Every Sunrise UI component in one place.">
+</head>
+<body class="sr-app" data-page="components" data-title="Components">
+<div class="sr-main">
+<main class="sr-page">
+
+  <div class="sr-pagehead"><div><p class="sr-eyebrow">Design system</p><h1>Components</h1><p>Copy any block. All of them work in light and dark and on every screen size.</p></div>
+    <select class="sr-select" data-pattern-select aria-label="Colour pattern" style="max-width:13rem"><option value="profiz">Profiz 3</option><option value="tropic">Tropical Pop</option><option value="jewel">Royal Jewel</option><option value="pastel">Pastel Cream</option><option value="sunset">Sunset Ramp</option><option value="neon">Neon Ocean</option></select></div>
+  <div class="sr-grid sr-lg-2">
+    <section class="sr-card sr-stack"><h2>Buttons</h2>
+      <div class="sr-row-wrap"><button class="sr-btn">Primary</button><button class="sr-btn sr-btn--soft">Soft</button><button class="sr-btn sr-btn--ghost">Ghost</button><button class="sr-btn sr-btn--danger">Delete</button></div>
+      <div class="sr-row-wrap"><button class="sr-btn sr-btn--sm"><svg class="sr-ic" aria-hidden="true"><use href="#i-plus"/></svg>Small</button><button class="sr-btn sr-btn--sm" aria-busy="true">Saving</button><button class="sr-btn sr-btn--sm" disabled>Disabled</button></div></section>
+    <section class="sr-card sr-stack"><h2>Badges &amp; chips</h2>
+      <div class="sr-row-wrap"><span class="sr-badge sr-badge--ok">Paid</span><span class="sr-badge sr-badge--warn">Pending</span><span class="sr-badge sr-badge--bad">Failed</span><span class="sr-badge sr-badge--info">New</span><span class="sr-badge sr-badge--brand">Level 2</span><span class="sr-badge">Draft</span></div>
+      <div class="sr-chips" role="group" aria-label="Chips"><button class="sr-chip" aria-pressed="true">All</button><button class="sr-chip" aria-pressed="false">Earnings</button><button class="sr-chip" aria-pressed="false">Withdrawals</button></div>
+      <div class="sr-seg" role="group" aria-label="Segmented"><button aria-pressed="true">Day</button><button aria-pressed="false">Week</button><button aria-pressed="false">Month</button></div></section>
+    <section class="sr-card sr-stack"><h2>Form fields</h2>
+      <div class="sr-field"><label class="sr-label" for="c1">Label</label><input class="sr-input" id="c1" placeholder="Placeholder"><span class="sr-help">Helpful hint under the field.</span></div>
+      <div class="sr-field is-invalid"><label class="sr-label" for="c2">With error</label><input class="sr-input" id="c2" value="07" aria-invalid="true" aria-describedby="c2e"><span class="sr-error" id="c2e">Enter a full phone number.</span></div>
+      <div class="sr-field"><label class="sr-label" for="c3">Input group</label><div class="sr-inputgroup"><span class="sr-inputgroup__addon">KES</span><input class="sr-input" id="c3" value="500" inputmode="numeric"></div></div>
+      <div class="sr-field"><label class="sr-label" for="c4">Select</label><select class="sr-select" id="c4"><option>Kenya</option><option>Uganda</option></select></div>
+      <div class="sr-row-wrap" style="justify-content:space-between"><label class="sr-check"><input type="checkbox" checked> Checkbox</label><label class="sr-switch"><input type="checkbox" checked><span class="sr-switch__track"></span>Switch</label></div></section>
+    <section class="sr-stack"><h2>Alerts</h2>
+      <div class="sr-alert"><span><svg class="sr-ic" aria-hidden="true"><use href="#i-info"/></svg></span><div><b>Information</b><span class="sr-small">Neutral news or a tip.</span></div></div>
+      <div class="sr-alert sr-alert--ok"><span><svg class="sr-ic" aria-hidden="true"><use href="#i-check"/></svg></span><div><b>Success</b><span class="sr-small">Your withdrawal was sent.</span></div></div>
+      <div class="sr-alert sr-alert--warn"><span><svg class="sr-ic" aria-hidden="true"><use href="#i-warn"/></svg></span><div><b>Warning</b><span class="sr-small">Your phone is not verified.</span></div></div>
+      <div class="sr-alert sr-alert--bad"><span><svg class="sr-ic" aria-hidden="true"><use href="#i-x"/></svg></span><div><b>Error</b><span class="sr-small">Payment failed. Try again.</span></div></div></section>
+    <section class="sr-card sr-stack"><h2>Progress, steps, copy box</h2>
+      <div class="sr-progress" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"><span style="width:65%"></span></div>
+      <ol class="sr-steps"><li class="is-done">Amount</li><li class="is-now">Confirm</li><li>Done</li></ol>
+      <div class="sr-copy"><code id="wh">https://novapal.app/api/webhook</code><button class="sr-btn sr-btn--soft sr-btn--sm" type="button" data-copy-from="#wh" data-copy><svg class="sr-ic" aria-hidden="true"><use href="#i-copy"/></svg>Copy</button></div></section>
+    <section class="sr-card sr-stack"><h2>Sheet, dialog, toast</h2><p class="sr-muted sr-small">Bottom sheet on phones, centred dialog from 768&nbsp;px. Esc closes, focus returns.</p>
+      <div class="sr-row-wrap"><button class="sr-btn" type="button" data-sheet-open="demo">Open sheet</button><button class="sr-btn sr-btn--ghost" type="button" data-toast="Saved!">Show toast</button></div></section>
+    <section class="sr-card sr-card--flush"><div class="sr-empty"><img src="i3d/coins.webp" alt="" width="80" height="80"><b>No withdrawals yet</b><span class="sr-small">When you withdraw, it shows up here.</span><a class="sr-btn sr-btn--sm" href="withdraw.html">Withdraw now</a></div></section>
+    <section class="sr-card sr-stack" aria-label="Loading"><h2>Loading skeleton</h2><div class="sr-skel" style="height:2.6rem;width:2.6rem;border-radius:.8rem"></div><div class="sr-skel" style="width:70%"></div><div class="sr-skel" style="width:45%"></div></section>
+  </div>
+  <h2 style="margin-top:.6rem">Colour cards</h2>
+  <div class="sr-auto sr-cycle" style="--min:14rem">
+    <article class="pz-c no-ghost"><p class="pz-label">Card 1</p><p class="pz-value"><small>KES</small>1,120</p><p class="pz-hint">Hint</p></article>
+    <article class="pz-c no-ghost"><p class="pz-label">Card 2</p><p class="pz-value"><small>KES</small>0.00</p><p class="pz-hint">Hint</p></article>
+    <article class="pz-c no-ghost"><p class="pz-label">Card 3</p><p class="pz-value"><small>KES</small>8,000</p><p class="pz-hint">Hint</p></article>
+    <article class="pz-c no-ghost"><p class="pz-label">Card 4</p><p class="pz-value"><small>KES</small>20,700</p><p class="pz-hint">Hint</p></article></div>
+  <div class="sr-sheet" id="demo" role="dialog" aria-modal="true" aria-labelledby="dt" aria-hidden="true"><div class="sr-sheet__panel sr-stack"><div class="sr-sheet__grip"></div>
+    <h2 id="dt">Unlock this hotel?</h2><p class="sr-muted">Unlocking costs KES 50 from your balance. You can then review it and earn KES 15.</p>
+    <div class="sr-grid sr-md-2"><button class="sr-btn sr-btn--ghost" type="button" data-sheet-close>Not now</button><button class="sr-btn" type="button" data-sheet-close data-toast="Unlocked">Unlock for KES 50</button></div></div></div>
+</main>
+</div>
+</body>
+</html>

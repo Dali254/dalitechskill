@@ -63,7 +63,7 @@ Never use `--brand` directly for small text on white — use `--brand-fg` (contr
   light direction (top-left), and store as `assets/ds/i3d/<name>.webp`.
 - Icon buttons: min 40×40px tap area, visible focus ring.
 
-## 5. Navigation
+## 5. Navigation (full shell rules: responsive.md)
 
 - **Tab bar** (`.sr-tabbar`): floating, white/surface, radius xl, 5 tabs, active tab gets a soft brand pill,
   centre `.sr-tab--cta` raised circle with brand gradient and a 5px ring in `--surface` colour.
